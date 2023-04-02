@@ -1,0 +1,44 @@
+<?php 
+require_once '../dbkoneksi.php';
+?>
+
+<?php
+    // Mendapatkan nilai id dari parameter GET
+    $_id = $_GET['id'];
+
+    // Membuat query SQL untuk mengambil data kartu dengan id tertentu
+    $sql = "SELECT * FROM kartu WHERE id=?";
+    $st = $dbh->prepare($sql);
+
+    // Menjalankan query dengan parameter id yang telah didapatkan sebelumnya
+    $st->execute([$_id]);
+
+    // Mengambil hasil query dan menyimpannya ke dalam variabel $row
+    $row = $st->fetch();
+?>
+
+<!-- Menampilkan data kartu dalam bentuk tabel -->
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td><?=$row['id']?></td>
+        </tr>
+        <tr>
+            <td>kode</td>
+            <td><?=$row['kode']?></td>
+        </tr>
+        <tr>
+            <td>nama</td>
+            <td><?=$row['nama']?></td>
+        </tr>
+        <tr>
+            <td>diskon</td>
+            <td><?=$row['diskon']?></td>
+        </tr>
+        <tr>
+            <td>iuran</td>
+            <td><?=$row['iuran']?></td>
+        </tr>
+    </tbody>
+</table>
